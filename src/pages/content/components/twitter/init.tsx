@@ -6,17 +6,12 @@ import {
   tweetStatusPageInitialAnalysis,
 } from "./pageHandlers";
 
-//
-
-// entry point on twitter page load
-initPhishingDetector();
-
 /**
  * Initialize the twitter phishing detector. Monitors for tweet related changes, determines which twitter page is loaded,
  * and then runs the appropriate handler for that page. Monitors for changes via tab event listeners (in background script) for tab (navigation) updates and activations
  * and a content mutation observer (here in content script) for ui updates.
  */
-async function initPhishingDetector() {
+export async function initPhishingDetector() {
   // get phishing local storage config as set in the extension popup [local storage name left as "phishingHandleDetector" for now]
   const phishingHandleDetector = await getStorage("local", "settings:phishingHandleDetector", true);
   if (!phishingHandleDetector) return;
